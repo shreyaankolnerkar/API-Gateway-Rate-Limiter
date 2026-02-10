@@ -19,7 +19,7 @@ def verify_api_key(x_api_key: str = Header(None), db: Session = Depends(get_db))
 
     api_key = (
         db.query(APIKey)
-        .filter(APIKey.key == x_api_key, APIKey.is_active == True)
+        .filter(APIKey.key == x_api_key, APIKey.is_active.is_(True))
         .first()
     )
 
