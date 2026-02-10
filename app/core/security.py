@@ -19,7 +19,7 @@ def get_api_key(
 ):
     api_key = (
         db.query(APIKey)
-        .filter(APIKey.key == x_api_key, APIKey.is_active == True)
+        .filter(APIKey.key == x_api_key, APIKey.is_active.is_(True))
         .first()
     )
 
