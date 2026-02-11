@@ -1,5 +1,5 @@
 # API-Gateway-Rate-Limiter
-# API Gateway – Reverse Proxy with Rate Limiting, Caching & Circuit Breaker
+## API Gateway – Reverse Proxy with Rate Limiting, Caching & Circuit Breaker
 
 A production-style **API Gateway / Reverse Proxy** built using **FastAPI**.  
 This gateway forwards requests to upstream services while applying **rate limiting, caching, circuit breaker protection, and analytics logging**.
