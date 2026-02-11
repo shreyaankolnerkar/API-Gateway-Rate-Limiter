@@ -24,3 +24,10 @@ async def record_failure(service: str):
     fails = await redis_client.incr(key)
     if fails >= FAIL_LIMIT:
         await redis_client.setex(f"cb:{service}:open", TIMEOUT, 1)
+
+
+async def is_circuit_open(service: str) -> bool:
+    # return True if circuit is OPEN
+    # example logic (adapt to your Redis logic)
+    state = await redis_client.get(f"circuit:{service}:state")
+    return state == "OPEN"

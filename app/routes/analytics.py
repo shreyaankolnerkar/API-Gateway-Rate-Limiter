@@ -31,6 +31,13 @@ def list_requests(db: Session = Depends(get_db)):
             "api_key": log.api_key,
             "path": log.path,
             "status_code": log.status_code,
+            "cache_status": log.cache_status,
+            "cache_key": log.cache_key,
+            "cache_ttl": log.cache_ttl,
+            "circuit_state": log.circuit_state,
+            "circuit_blocked": log.circuit_blocked,
+            "upstream_latency_ms": log.upstream_latency_ms,
+            "upstream_error_type": log.upstream_error_type,
             "created_at": log.created_at,
         }
         for log in logs

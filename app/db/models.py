@@ -27,8 +27,16 @@ class APIKey(Base):
 
 class RequestLog(Base):
     __tablename__ = "request_logs"
+
     id = Column(Integer, primary_key=True)
-    api_key = Column(String)
-    path = Column(String)
+    api_key = Column(String, index=True)
+    path = Column(String, index=True)
     status_code = Column(Integer)
+    cache_status = Column(String)
+    cache_key = Column(String, nullable=True)
+    cache_ttl = Column(Integer, nullable=True)
+    circuit_state = Column(String)
+    circuit_blocked = Column(Boolean, default=False)
+    upstream_latency_ms = Column(Integer, nullable=True)
+    upstream_error_type = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
