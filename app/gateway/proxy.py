@@ -30,7 +30,6 @@ async def proxy_request(path: str, request: Request, api_key=Depends(get_api_key
     circuit_state = "CLOSED"
     upstream_error_type = "None"
 
-    # -------- CACHE CHECK --------
     if request.method == "GET":
         cache_k = make_cache_key(url, dict(request.query_params))
         cached = await get_cache(cache_k)
@@ -62,7 +61,6 @@ async def proxy_request(path: str, request: Request, api_key=Depends(get_api_key
 
         cache_status = "MISS"
 
-    # -------- UPSTREAM CALL --------
     try:
         async with httpx.AsyncClient() as client:
             resp = await client.request(
@@ -142,7 +140,6 @@ async def proxy_request(path: str, request: Request, api_key=Depends(get_api_key
 
         raise HTTPException(500, "Unknown upstream error")
 
-    # -------- SUCCESS PATH --------
     latency_ms = int((time.time() - start) * 1000)
 
     if cache_k and resp.status_code == 200:

@@ -27,7 +27,5 @@ async def record_failure(service: str):
 
 
 async def is_circuit_open(service: str) -> bool:
-    # return True if circuit is OPEN
-    # example logic (adapt to your Redis logic)
     state = await redis_client.get(f"circuit:{service}:state")
     return state == "OPEN"

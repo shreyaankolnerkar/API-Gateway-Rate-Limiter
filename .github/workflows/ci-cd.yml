@@ -1,0 +1,21 @@
+name: Build & Push Docker Image
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+      - name: Build Image
+        run: docker build -t shreyaankolnerkar/api-gateway:latest .
+
+      - name: Push Image
+        run: docker push shreyaankolnerkar/api-gateway:latest
