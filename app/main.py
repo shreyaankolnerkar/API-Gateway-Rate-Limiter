@@ -6,9 +6,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.gateway.proxy import router as proxy_router
 from app.routes.analytics import router as analytics_router
 from app.routes.keys import router as keys_router
+from app.routes.ping import router as ping_router
 from app.workers.loggers import logger_worker
 
 app = FastAPI(title="API Gateway with Rate Limiting")
+app.include_router(ping_router)
 
 app.add_middleware(
     CORSMiddleware,
